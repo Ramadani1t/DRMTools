@@ -1,4 +1,4 @@
-# 🔑 DRM-DL & DRM-DEC
+# 🔑 DRMTools
 A 2in1 Script To Download DRM Media &amp; Decryptor DRM Widevine API Solution
 ![](https://github.com/Ramadani1t/DRM-DL-nd-DRM-DEC/blob/main/image/smintty.2025-05-31_19-37-15.png?raw=true)
 
