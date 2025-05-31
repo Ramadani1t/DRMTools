@@ -19,7 +19,7 @@ DRM Downloader adalah skrip untuk mendowload file media seperti audio, video ata
 - Penggabungan, pemberian nama audio dan video oleh ffmpeg
 
 ##### DRM Decryptor
-DRM Decryptor adalah skrip untuk decrypt file media seperti audio dan video yang dilindungi, terenkripsi atau terkunci oleh DRM dengan yang hanya bisa diakses oleh satu arah saja oleh perangkat pemutar dengan sertifikasi khusus oleh konten hak cipta melalui teknologi widevine
+DRM Decryptor adalah skrip untuk decrypt file media seperti audio dan video yang dilindungi, terenkripsi atau terkunci oleh DRM yang hanya bisa diakses oleh satu arah saja oleh perangkat pemutar dengan sertifikasi khusus oleh konten hak cipta dengan teknologi widevine
 - Pemecahan Kunci Widevine Otomatis Online dengan API (cdrm-project.com)
 - Python API cdrm-project Response POST dan GET
 - Dekriptor support hingga 3 baris kunci widevine oleh mp4decrypt
