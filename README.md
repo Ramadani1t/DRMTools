@@ -15,7 +15,7 @@ DRM Downloader adalah skrip untuk mendowload file media seperti audio, video ata
 - Download Video
 - Download Audio dan Video Bersamaan
 - Pemilihan Kualitas File dengan yt-dlp format
-- External download oleh aria2c
+- External download manager oleh aria2c
 - Penggabungan, pemberian nama audio dan video oleh ffmpeg
 
 ##### DRM Decryptor
