@@ -30,7 +30,7 @@ DRM Decryptor adalah skrip untuk decrypt file media seperti audio dan video yang
 ## ❗ Perhatian
 Harap install depedensi ini agar skrip bisa digunakan dengan lancar
 - Python / python3
-- Library requests
+- Python requests
 - ffmpeg
 - aria2c
 - mp4decript / bento4
