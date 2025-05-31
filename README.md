@@ -4,7 +4,7 @@ A 2in1 Script To Download DRM Media &amp; Decryptor DRM Widevine API Solution
 
 ## Isi File
 Pastikan kedua skrip ini ditempatkan pada script yang sama agar pemecahan kunci widevine dengan API ini bisa berfungsi dengan semestinya
-- DRM-DL.sh
+- DRMTools.sh
 - get_keys.py
 
 ## ✨ Fitur
