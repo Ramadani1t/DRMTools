@@ -1,6 +1,6 @@
 # 🔑 DRM-DL & DRM-DEC
 A 2in1 Script To Download DRM Media &amp; Decryptor DRM Widevine API Solution
-![](https://github.com/Ramadani1t/DRM-DL-nd-DRM-DEC/blob/main/image/logo.png?raw=true)
+![](https://github.com/Ramadani1t/DRM-DL-nd-DRM-DEC/blob/main/image/smintty.2025-05-31_19-37-15.png?raw=true)
 
 ## Isi File
 Pastikan kedua skrip ini ditempatkan pada script yang sama agar pemecahan kunci widevine dengan API ini bisa berfungsi dengan semestinya
