@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTable TTML Indonesia by Rmdz</title>
+    <link rel="icon" type="image/jpg"
+        href="https://raw.githubusercontent.com/Ramadani1t/Biodata-Publik/refs/heads/main/Different.jpg">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .tag-button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 5px;
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .tag_raw {
+            background-color: #28a745 !important;
+        }
+
+        .tag_qqmusic {
+            background-color: #17a2b8 !important;
+        }
+
+        .tag_apple_music {
+            background-color: #fd7e14 !important;
+        }
+
+        .tag_indonesia {
+            background-color: #ffc107 !important;
+        }
+
+        .tag_romanisasi {
+            background-color: #6f42c1 !important;
+        }
+
+        .tag_background_vocal {
+            background-color: #20c997 !important;
+        }
+        
+        /* Hilangkan styling filter-container yang lama karena tidak lagi digunakan di thead */
+        .filter-container select {
+            padding: 4px 8px;
+            font-size: 0.9em;
+        }
+
+        .filter-container button {
+            padding: 4px 8px;
+            font-size: 0.9em;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            background-color: #dc3545;
+            border: none;
+        }
+        
+        /* Tambahkan CSS baru untuk Bootstrap-select agar tidak meluber */
+        .bootstrap-select > .dropdown-toggle {
+            height: 38px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.9em;
+            border-radius: 4px;
+        }
+        
+        /* Atur lebar agar tidak terlalu besar */
+        #filterTag.bootstrap-select {
+            width: 150px !important; 
+        }
+
+        .info-text,
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            /* Jarak antar elemen */
+            max-width: 200px;
+            /* Agar tampilan tetap rapi */
+        }
+
+        .description-box {
+            padding: 15px;
+            background: #f8f9fa;
+            /* Latar belakang tetap */
+            border-left: 5px solid #007bff;
+            /* Tetap mempertahankan border kiri */
+            margin-bottom: 20px;
+        }
+
+        .description-box a {
+            display: inline-flex;
+            align-items: center;
+            background: #007bff;
+            /* Warna tombol tetap */
+            border: 1px solid #0056b3;
+            /* Tambahkan border untuk lebih jelas */
+            padding: 5px 10px;
+            /* Padding tetap */
+            border-radius: 5px;
+            /* Sudut tetap membulat */
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: white;
+            /* Warna teks tetap putih */
+            font-weight: bold;
+            transition: background 0.3s, border 0.3s;
+            /* Efek transisi */
+        }
+
+        .description-box a:hover {
+            background: #0056b3;
+            /* Efek hover */
+            border: 1px solid #003f7f;
+        }
+
+        .description-box img {
+            width: 20px;
+            /* Ukuran lebih kecil sesuai teks */
+            height: auto;
+            /* Proporsi tetap */
+            vertical-align: middle;
+            /* Posisikan sejajar teks */
+            margin-right: 5px;
+            /* Jarak dengan teks */
+            border-radius: 3px;
+            /* Sedikit membulatkan ikon */
+        }
+
+        .feedback-container {
+            margin-top: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons img {
+            width: 32px;
+            height: 32px;
+            border-radius: 5px;
+        }
+
+        .preview-img {
+            max-width: 100px;
+            /* Menyesuaikan lebar gambar */
+            height: auto;
+            /* Memastikan proporsi tetap */
+            display: block;
+            /* Menghindari spasi ekstra */
+            margin: auto;
+            /* Memposisikan gambar ke tengah */
+            border-radius: 5px;
+            /* Memberikan sudut bulat */
+        }
+
+        .cover-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cover-wrapper img {
+            display: block;
+            border-radius: 5px;
+            max-width: 100px;
+            height: auto;
+        }
+
+        .cover-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 12px;
+        }
+
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Tambahkan CSS untuk menempatkan filter tag di tengah */
+        .dataTables_filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            table.dataTable {
+                width: 100% !important;
+            }
+
+            .dataTables_wrapper {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="mb-4">Database TTML Indonesia</h2>
+
+        <div class="description-box">
+            <p><strong>📂 Web Database Backup Lagu dengan lirik ttml</strong></p>
+            <p><strong>🌍 Datatable berbasis Google Apps Script dan Dihosting oleh Github 👨&zwj;💻</strong></p>
+
+            <div class="d-flex gap-2 mb-3">
+                <a href="https://github.com/Ramadani1t" target="_blank" class="btn btn-dark">
+                    <i class="bi bi-github"></i> Profil GitHub
+                </a>
+                <a href="https://github.com/Ramadani1t/DB-TTML-ID" target="_blank" class="btn btn-primary">
+                    <i class="bi bi-github"></i> Repository GitHub
+                </a>
+                <a href="https://github.com/" target="_blank" class="btn btn-success">
+                    <i class="bi bi-code-slash"></i> Biodata saya
+                </a>
+            </div>
+
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+            <p>Link yang disertakan harap download sendiri di halaman GitHub dengan cara:</p>
+            <ol>
+                <li>Klik titik tiga di atas history</li>
+                <li>Pilih download</li>
+                <li>Dan file pun terdownload</li>
+            </ol>
+            <p><strong>Catatan:</strong> Agar Lirik terbaca taruh file lirik berformat '.ttml' ditempat yang sama, dan nama file audio yang
+                sama, atau salin lirik dan masukan kedalam metadata audio secara langsung !!!</p>
+            <p><strong>Perhatian:</strong> File lirik berformat '.ttml' ini hanya bisa dipakai oleh 2 pemutar musik ini yaitu
+                <a href="https://github.com/Steve-xmh/applemusic-like-lyrics" target="_blank">
+                    <img src="https://raw.githubusercontent.com/Steve-xmh/applemusic-like-lyrics/refs/heads/full-refractor/packages/docs/public/favicon.ico"
+                        alt="AMLL Player">AMLL Player</a><a href="#" target="_blank">
+                    <img src="https://raw.githubusercontent.com/Ramadani1t/DB-TTML-ID/refs/heads/main/20250327_072901.png"
+                        alt="Hifi Music/音乐播放er">Hifi Music/音乐播放er</a>
+            </p>
+            <p><strong>Ada beberapa opsi download pada kolom download:</strong></p>
+            <ul>
+                <li>Link TTML</li>
+                <li>Link TTML Unroman <span class="text-muted">(Lirik TTML tanpa diromanisasi tapi tetap menambahkan terjemahan
+                        indonesia)</span></li>
+                <li><s>Lirik LRC</s> <span class="text-danger">*sementara tidak tersedia karena masalah penyimpanan</span></li>
+                <li><s>Lirik LLRC</s> <span class="text-danger">*sementara tidak tersedia karena masalah penyimpanan</span></li>
+            </ul>
+
+            <p>💡 <strong>Harap Jangan Disalahgunakan kepada pembuat!</strong> 🚀🎶</p>
+            <p>Silakan dicoba! Jika masih ada yang perlu diperbaiki atau ditambahkan, <strong>kirim feedback kalian! 😃</strong></p>
+        </div>
+        <div class="table-responsive">
+            <div id="filterWrapper"></div>
+            
+            <table id="myDataTable" class="display table table-bordered nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Preview</th>
+                        <th>Informasi Lagu</th>
+                        <th>Album</th>
+                        <th>Tag</th>
+                        <th>Sub Indo</th>
+                        <th>Format Sinkronisasi</th>
+                        <th>Updated</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="feedback-container">
+            <h4>Kirim Feedback</h4>
+            <form id="feedbackForm">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Nama Anda" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Email Anda" required>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="message" rows="3" placeholder="Tulis pesan Anda di sini..."
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Feedback</button>
+                <p class="mt-2"><small><i>📌 Kami tidak akan memberikan email Anda secara publik.</i></small></p>
+            </form>
+
+            <p class="mt-3"><strong>Jika tidak bisa mengirim feedback, kirim pesan ke email ini:</strong></p>
+            <div class="email-box">
+                <span class="email-text" id="emailText">ramadanii10.ns@gmail.com</span>
+                <button class="btn btn-sm btn-outline-primary" id="copyButton" onclick="copyEmail()">Salin</button>
+                <span id="copyMessage" style="color: green; font-weight: bold; display: none;">Disalin!</span>
+            </div>
+
+            <footer class="footer">
+                <div class="social-icons">
+                    <a href="https://saweria.co/Rmdzintesis" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlzxSU9A_xG9WvjsJ6EceE0enyby00cdQvzsfil8-T75Tzhs_flpesIt4&s=10"
+                            alt="Saweria" width="24">
+                    </a>
+                    <a href="https://wa.me/6289518007805" target="_blank">
+                        <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/whatsapp-512.png"
+                            alt="WhatsApp" width="24">
+                    </a>
+                    <a href="https://www.instagram.com/_@ramaja" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                            alt="Instagram" width="24">
+                    </a>
+                    <a href="https://www.linkedin.com/in/ramadani-arya-nugraha-02a55833b?trk=contact-info" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                            alt="LinkedIn" width="24">
+                    </a>
+                </div>
+                <p>Dibuat oleh <strong>Ramadani Arya Nugraha</strong> dan <strong>Chat GPT</strong> &copy; 2024</p>
+            </footer>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    const table = $('#myDataTable').DataTable({
+                        ajax: {
+                            url: 'https://script.google.com/macros/s/AKfycbxJ-qYkqcZE7-P0QEoc1duoWEIKRkdt_phopQtb3g31GJaS2TrsQpOD-sVy3PDkhdlFkw/exec',
+                            dataSrc: function (json) {
+                                // Periksa apakah json.data ada dan merupakan array
+                                if (!json.data || !Array.isArray(json.data)) {
+                                    console.error("Data tidak valid:", json);
+                                    return []; // Kembalikan array kosong agar DataTables tidak error
+                                }
+
+                                return json.data.map(item => {
+                                    // Normalisasi tag di sini
+                                    const normalizeTag = (tag) => tag.toLowerCase().replace(/\s+/g, '_');
+                                    return {
+                                        ...item,
+                                        TagDisplay: item.Tag ? item.Tag.split(',').map(tag => tag.trim()).join(',') : '',
+                                        Tag: item.Tag ? item.Tag.split(',').map(tag => normalizeTag(tag)).join(',') : ''
+                                    };
+                                });
+                            },
+                            error: function (xhr, error, thrown) {
+                                console.error("Terjadi kesalahan saat mengambil data:", error, thrown);
+                                // Anda mungkin ingin menampilkan pesan kesalahan kepada pengguna di sini
+                            }
+                        },
+                        scrollX: true,
+                        responsive: true,
+                        columns: [
+                            { "data": "ID", "title": "ID", "width": "5%" },
+                            {
+    "data": "Image",
+    "title": "Cover",
+    "width": "10%",
+    "render": function (data, type, full) {
+        let isNew = false;
+        if (full.Updated) {
+            let updatedDate = new Date(full.Updated);
+            let now = new Date();
+            let diffHours = (now - updatedDate) / (1000 * 60 * 60);
+            isNew = diffHours <= 24;
+        }
+
+        return `
+            <div class="cover-wrapper">
+                <img src="${data}" alt="Preview">
+                ${isNew ? '<span class="cover-badge">NEW</span>' : ''}
+            </div>
+        `;
+    }
+},
+
+                            {
+                                "data": null,
+                                "title": "Informasi Lagu",
+                                "width": "20%",
+                                "render": function (data, type, full) {
+                                    const audioBtn = full['Link'] && full['Link'].trim() !== ""
+                                        ? '<a class="btn btn-secondary btn-sm download-btn" data-link="' + full['Link'] + '" data-type="Audio" onclick="forceDownloadFromElement(this)">Link Audio</a>'
+                                        : '<a class="btn btn-secondary btn-sm disabled">(Link Audio Sedang Dibuat)</a>';
+
+                                    return '<div class="info-text">' +
+                                        '<b>' + full['Nama'] + '</b>' +
+                                        '<span>' + full['Artis'] + '</span>' +
+                                        audioBtn +
+                                        '</div>';
+                                }
+                            },
+                            { "data": "Album", "title": "Album", "width": "10%" },
+                            {
+                                "data": "TagDisplay",
+                                render: function (data) {
+                                    return data.split(',').map(tag => {
+                                        const original = tag.trim();
+                                        const lower = original.toLowerCase().replace(/\s+/g, '_');
+                                        return `<span class="tag-button tag_${lower}">${original}</span>`;
+                                    }).join(' ');
+                                }
+                            },
+                            { "data": "SubIDN", "title": "Terjemahan Indonesia", "width": "10%" },
+                            { "data": "Format", "title": "Format Sinkronisasi", "width": "10%" },
+                            {
+    "data": "Updated",
+    "title": "Updated",
+    "width": "12%",
+    "render": function (data, type, full) {
+        if (!data) return "";
+
+        let updatedDate = new Date(data);
+
+        return updatedDate.toLocaleString("id-ID", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "Asia/Jakarta"
+        });
+    }
+},
+
+                            {
+                                "data": null,
+                                "title": "Download Lirik",
+                                "width": "20%",
+                                "render": function (data, type, full) {
+                                    const ttmlBtn = full['TTML'] && full['TTML'].trim() !== ""
+                                        ? '<a class="btn btn-primary btn-sm download-btn" data-link="' + full['TTML'] + '" data-type="Lirik TTML" onclick="forceDownloadFromElement(this)">Lirik TTML</a>'
+                                        : '<a class="btn btn-primary btn-sm disabled">(Link TTML Sedang Dibuat)</a>';
+                                    const ttmlunromanBtn = full['TTMLUnroman'] && full['TTMLUnroman'].trim() !== ""
+                                        ? '<a class="btn btn-success btn-sm download-btn" data-link="' + full['TTMLUnroman'] + '" data-type="Lirik TTML Unroman" onclick="forceDownloadFromElement(this)">Lirik TTML Unroman</a>'
+                                        : '';
+                                    // Link LRC dan LLRC Sementara Belum Tersedia
+                                    const lrcBtn = full['LRC'] && full['LRC'].trim() !== ""
+                                        ? '<a class="btn btn-success btn-sm download-btn" data-link="' + full['LRC'] + '" data-type="Lirik LRC" onclick="forceDownloadFromElement(this)">Lirik LRC</a>'
+                                        : '';
+                                    const llrcBtn = full['LLRC'] && full['LLRC'].trim() !== ""
+                                        ? '<a class="btn btn-success btn-sm download-btn" data-link="' + full['LLRC'] + '" data-type="Lirik LLRC" onclick="forceDownloadFromElement(this)">Lirik LLRC</a>'
+                                        : '';
+
+                                    return '<div class="download-buttons">' + ttmlBtn + ttmlunromanBtn + lrcBtn + llrcBtn + '</div>';
+                                }
+                            }
+                        ]
+                    });
+                    
+                    // Pindahkan elemen filter ke dalam wrapper di atas tabel
+                    const filterTagHTML = `
+                        <label>Tag:
+                            <select id="filterTag" class="selectpicker" data-live-search="true" multiple>
+                                <option value="Raw">Raw</option>
+                                <option value="QQMusic">QQMusic</option>
+                                <option value="Apple Music">Apple Music</option>
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Romanisasi">Romanisasi</option>
+                                <option value="Background Vocal">Background Vocal</option>
+                            </select>
+                        </label>
+                        <button id="resetFilter" class="btn btn-danger btn-sm">Reset</button>
+                    `;
+                    
+                    // Masukkan HTML filter ke elemen dataTables_filter yang dibuat otomatis oleh DataTables
+                    $('#myDataTable_filter').prepend(filterTagHTML);
+
+                    // Inisialisasi Bootstrap-select
+                    $('#filterTag').selectpicker();
+
+                    // Fungsi untuk memfilter tag (sekarang menggunakan event 'changed.bs.select')
+                    $('#filterTag').on('changed.bs.select', function () {
+                        const selected = $(this).val();
+                        let searchRegex = '';
+
+                        if (selected && selected.length > 0) {
+                            searchRegex = selected.map(tag => {
+                                const underscoredTag = tag.replace(/\s+/g, '_');
+                                return `(${tag}|${underscoredTag})`;
+                            }).join('|');
+                            searchRegex = `(${searchRegex})`;
+                        }
+
+                        table.column(4).search(searchRegex, true, false).draw();
+                    });
+
+                    // Fungsi untuk reset filter
+                    $('#resetFilter').on('click', function () {
+                        $('#filterTag').selectpicker('deselectAll');
+                        table.column(4).search('').draw();
+                    });
+
+
+// Fungsi global supaya bisa dipanggil dari onclick
+window.forceDownloadFromElement = function (btn) {
+    const url = btn.getAttribute("data-link");
+    const type = btn.getAttribute("data-type") || "File";
+
+    if (!url || url.trim() === "") {
+        alert(type + " belum tersedia.");
+        return;
+    }
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP error " + response.status);
+            return response.blob();
+        })
+        .then(blob => {
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = decodeURIComponent(url.split('/').pop()); // nama asli file
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+        })
+        .catch(err => {
+            alert("Gagal mendownload " + type + ": " + err.message);
+        });
+};
+
+                    // Form feedback - Kirim ke email pengguna
+                    $('#feedbackForm').submit(function (event) {
+                        event.preventDefault();
+                        const name = $('#name').val();
+                        const email = $('#email').val();
+                        const message = $('#message').val();
+
+                        const mailtoLink = "mailto:ramadanii10.ns@gmail.com?subject=Feedback dari " + encodeURIComponent(name) +
+                            "&body=Nama: " + encodeURIComponent(name) +
+                            "%0AEmail: " + encodeURIComponent(email) +
+                            "%0APesan: " + encodeURIComponent(message);
+                        window.location.href = mailtoLink;
+                    });
+
+                    // Fungsi menyalin email ke clipboard
+                    window.copyEmail = function () {
+                        const emailText = document.getElementById("emailText").innerText;
+                        const copyMessage = document.getElementById("copyMessage");
+                        const copyButton = document.getElementById("copyButton");
+
+                        navigator.clipboard.writeText(emailText).then(function () {
+                            copyMessage.style.display = "inline";
+                            copyButton.innerText = "✔";
+
+                            setTimeout(function () {
+                                copyMessage.style.display = "none";
+                                copyButton.innerText = "Salin";
+                            }, 2000);
+                        });
+                    }
+                });
+            </script>
+</body>
+
+</html>
